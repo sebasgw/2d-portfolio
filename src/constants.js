@@ -1,0 +1,1 @@
+export const scaleFactor = 4 //so that things(maps, characters, etc) would be scale up 4 times bigger
