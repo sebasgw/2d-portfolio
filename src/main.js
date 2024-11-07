@@ -1,5 +1,6 @@
 import { scaleFactor } from "./constants";
 import { k } from "./kaboomContext";
+import { displayDialogue } from "./utils";
 
 k.loadSprite("spritesheet", "./spritesheet.png", {
     sliceX: 39, 
@@ -22,11 +23,11 @@ k.scene("main", async () =>{
   //logic for scene
   const mapData = await (await fetch ("./map.json")).json(); //await allows for the image to load up before doing anything else
   const layers = mapData.layers;
-  const map = k.make([k.sprite("map"), //calls map created with .loadSprite
+  const map = k.add([k.sprite("map"), //calls map created with .loadSprite
                       k.pos(0),
                       k.scale(scaleFactor)]); //make function creates the object but it does not displays it yet, the add function adds it to the scene
   
-  const player = k.make([k.sprite("spritesheet", {anim: "idle_down"}),
+  const player = k.add([k.sprite("spritesheet", {anim: "idle_down"}),
                          k.area({shape: new k.Rect(k.vec2(0, 3), 10, 10)}),
                          k.body(),
                          k.anchor("center"),
@@ -53,11 +54,31 @@ k.scene("main", async () =>{
         if (boundary.name){
           player.onCollide(boundary.name, () =>{
             player.isInDialogue = true;
+            displayDialogue("Test", () => (player.isInDialogue = false));
 
           });
         }
       }
-    }}
+      continue;
+    }
+    if (layer.name === "spawnpoints"){
+      for (const entity of layer.objects){
+        if (entity.name === "player") {
+          player.pos = k.vec2(
+          (map.pos.x + entity.x) * scaleFactor,
+          (map.pos.y + entity.y) * scaleFactor
+        );
+
+        k.add(player);
+        continue;
+       }
+     }
+  }
+ }
+
+ k.onUpdate(() =>{
+  k.camPos(player.pos.x, player.pos.y + 100)
+ })
 });
 
 k.go("main"); //go is to define the default scene
