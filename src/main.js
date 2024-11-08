@@ -27,7 +27,7 @@ k.scene("main", async () =>{
                       k.pos(0),
                       k.scale(scaleFactor)]); //make function creates the object but it does not displays it yet, the add function adds it to the scene
   
-  const player = k.add([k.sprite("spritesheet", {anim: "idle_down"}),
+  const player = k.add([k.sprite("spritesheet", {anim: "idle-down"}),
                          k.area({shape: new k.Rect(k.vec2(0, 3), 10, 10)}),
                          k.body(),
                          k.anchor("center"),
