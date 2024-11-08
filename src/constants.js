@@ -6,7 +6,7 @@ export const dialogueData = {
     "sofa-table": `Vengo aqui al finalizar mis dias de trabajo para descansar. Me gusta leer y jugar videojuegos`,
     tv: `Me encanta el cine y los programas de television!`,
     bed: `En mi cama descanso y leo todas las noches antes de dormir`,
-    resume: `Este es mi escritorio, en el esta mi CV <a href="https://github.com/JSLegendDev/Resume/blob/main/JSLegend%20Resume-1.pdf" target="_blank">Check it out?</a>`,
+    resume: `Este es mi escritorio, en el deje el enlace a mi <a href="https://www.linkedin.com/in/sebastian-gonzalez-weiberlen/" target="_blank">perfil de LinkedIn.</a>`,
     projects: `Me gusta la ingenieria de datos y el desarrollo backend`,
     library: `Esta es mi coleccion de libros donde tengo novelas de sherlock holmes, julio verne, la saga de harry potter, comics y tambien libros de psicologia y filosofia`,
     exit: `Deseas irte? Solamente cierra la pestanha! Gracias por visitarme, hasta pronto :)`,

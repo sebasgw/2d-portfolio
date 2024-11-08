@@ -1,4 +1,4 @@
-import { scaleFactor } from "./constants";
+import { dialogueData, scaleFactor } from "./constants";
 import { k } from "./kaboomContext";
 import { displayDialogue, setCamScale } from "./utils";
 
@@ -55,7 +55,7 @@ k.scene("main", async () =>{
         if (boundary.name){
           player.onCollide(boundary.name, () =>{
             player.isInDialogue = true;
-            displayDialogue("Acta de matrimonio de sebas y jime", () => (player.isInDialogue = false));
+            displayDialogue(dialogueData[boundary.name], () => (player.isInDialogue = false));
 
           });
         }
