@@ -42,6 +42,4 @@ export function setCamScale(k) {
   } else {
     k.camScale(k.vec2(1.5));
   }
-
-
 }

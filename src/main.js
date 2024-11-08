@@ -23,11 +23,12 @@ k.scene("main", async () =>{
   //logic for scene
   const mapData = await (await fetch ("./map.json")).json(); //await allows for the image to load up before doing anything else
   const layers = mapData.layers;
+
   const map = k.add([k.sprite("map"), //calls map created with .loadSprite
                       k.pos(0),
                       k.scale(scaleFactor)]); //make function creates the object but it does not displays it yet, the add function adds it to the scene
   
-  const player = k.add([k.sprite("spritesheet", {anim: "idle-down"}),
+  const player = k.make([k.sprite("spritesheet", {anim: "idle-down"}),
                          k.area({shape: new k.Rect(k.vec2(0, 3), 10, 10)}),
                          k.body(),
                          k.anchor("center"),
@@ -35,8 +36,8 @@ k.scene("main", async () =>{
                          k.scale(scaleFactor),
                          {
                           speed: 250,
-                          direction: "down"
-                          //isInDialogue: false,
+                          direction: "down",
+                          isInDialogue: false,
                          },
                          "player"
                       ]);
@@ -54,7 +55,7 @@ k.scene("main", async () =>{
         if (boundary.name){
           player.onCollide(boundary.name, () =>{
             player.isInDialogue = true;
-            displayDialogue("Test", () => (player.isInDialogue = false));
+            displayDialogue("Acta de matrimonio de sebas y jime", () => (player.isInDialogue = false));
 
           });
         }
@@ -76,9 +77,20 @@ k.scene("main", async () =>{
   }
  }
 
- k.onUpdate(() =>{
+
+ k.onUpdate(() =>{ //with this the camera object follows the player
   k.camPos(player.pos.x, player.pos.y + 100)
- })
+ });
+
+
+ k.onMouseDown((mouseBtn) => {
+  if (mouseBtn !== "left" || player.isInDialogue) return; //|| player.isInDialogue so that the player wont move while reading dialogs
+
+  const worldMousePos = k.toWorld(k.mousePos());
+  player.moveTo(worldMousePos, player.speed);
+
+ }); //onMouseDown is an event of kaboom js
+
 });
 
 k.go("main"); //go is to define the default scene
